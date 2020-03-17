@@ -1,4 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from barcode_image import barcode_image
+from barcode_video import barcode_video
 
 
 class Ui_Barcode_Scanner(object):
@@ -108,7 +110,11 @@ class Ui_Barcode_Scanner(object):
         self.actionAdd_image.setText(_translate("Barcode_Scanner", "Add Image"))
         self.actionOpen_Web_Cam.setText(_translate("Barcode_Scanner", "Open Web Cam"))
         self.actionExit.setText(_translate("Barcode_Scanner", "Exit"))
+        self.open_cam_button.clicked.connect(self.webcam)
 
+    def webcam(self):
+        obj = barcode_video.Detector_cam()
+        obj.scan()
 
 if __name__ == "__main__":
     import sys
