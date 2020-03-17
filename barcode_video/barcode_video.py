@@ -1,22 +1,45 @@
 import pyzbar.pyzbar as pyzbar
-from imutils.video import VideoStream
+from imutils.video import VideoStream, FileVideoStream
 import imutils
 import argparse
 import cv2
 import datetime
 
 class Detector_cam:
-    
+    def scan_file(self,fname):
+        vs = FileVideoStream(fname).start()
+
+        while True:
+
+            frame = vs.read()
+            # frame = imutils.resize(frame)
+
+            barcodes = pyzbar.decode(frame)
+
+            for code in barcodes:
+                (x,y,w,h) = code.rect
+                cv2.rectangle(frame,(x,y),(x+w,x+h),(0,0,255),2)
+
+                bar_data = code.data.decode('utf-8')
+                bar_type = code.type
+
+                text = f'{bar_data} ({bar_type})' 
+                cv2.putText(frame,text,(x,y-10),cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0,0,255), 2)
+
+                
+            cv2.imshow("Barcode Scanner",frame)
+            key = cv2.waitKey(1) & 0xFF
+
+            if key ==ord('q'):
+                break
+
+        cv2.destroyAllWindows()
+        vs.stop()
+
+
     def scan(self):
-        ap = argparse.ArgumentParser()
-        ap.add_argument('-o','--output',default='barcode.csv',type=str,help='output')
-        args = vars(ap.parse_args())
 
         vs = VideoStream(src=0).start()
-
-        found = set()
-
-        csv = open(args['output'],'w')
 
         while True:
 
@@ -35,10 +58,6 @@ class Detector_cam:
                 text = f'{bar_data} ({bar_type})' 
                 cv2.putText(frame,text,(x,y-10),cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0,0,255), 2)
 
-                if bar_data not in found:
-                    csv.write(f'{datetime.datetime.now()} {bar_data} \n')
-                    csv.flush()
-                    found.add(bar_data)
                 
             cv2.imshow("Barcode Scanner",frame)
             key = cv2.waitKey(1) & 0xFF
@@ -46,7 +65,6 @@ class Detector_cam:
             if key ==ord('q'):
                 break
 
-        csv.close()
         cv2.destroyAllWindows()
         vs.stop()
 

@@ -2,7 +2,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from barcode_image import barcode_image
 from barcode_video import barcode_video
 
-
 class Ui_Barcode_Scanner(object):
     def setupUi(self, Barcode_Scanner):
         Barcode_Scanner.setObjectName("Barcode_Scanner")
@@ -31,34 +30,54 @@ class Ui_Barcode_Scanner(object):
         self.tab.setObjectName("tab")
         self.Image = QtWidgets.QWidget()
         self.Image.setObjectName("Image")
-        self.ok_button = QtWidgets.QDialogButtonBox(self.Image)
-        self.ok_button.setGeometry(QtCore.QRect(160, 150, 193, 28))
-        self.ok_button.setStandardButtons(QtWidgets.QDialogButtonBox.Ok|QtWidgets.QDialogButtonBox.Reset)
-        self.ok_button.setCenterButtons(False)
-        self.ok_button.setObjectName("ok_button")
-        self.widget = QtWidgets.QWidget(self.Image)
-        self.widget.setGeometry(QtCore.QRect(20, 60, 491, 29))
-        self.widget.setObjectName("widget")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget)
+        self.layoutWidget = QtWidgets.QWidget(self.Image)
+        self.layoutWidget.setGeometry(QtCore.QRect(20, 60, 491, 29))
+        self.layoutWidget.setObjectName("layoutWidget")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.Address_bar = QtWidgets.QLineEdit(self.widget)
+        self.Address_bar = QtWidgets.QLineEdit(self.layoutWidget)
         self.Address_bar.setObjectName("Address_bar")
         self.horizontalLayout.addWidget(self.Address_bar)
-        self.browser = QtWidgets.QToolButton(self.widget)
+        self.browser = QtWidgets.QToolButton(self.layoutWidget)
         self.browser.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.browser.setObjectName("browser")
         self.horizontalLayout.addWidget(self.browser)
+        self.reset_button = QtWidgets.QPushButton(self.Image)
+        self.reset_button.setGeometry(QtCore.QRect(130, 160, 93, 28))
+        self.reset_button.setObjectName("reset_button")
+        self.ok_button = QtWidgets.QPushButton(self.Image)
+        self.ok_button.setGeometry(QtCore.QRect(270, 160, 93, 28))
+        self.ok_button.setObjectName("ok_button")
         self.tab.addTab(self.Image, "")
-        self.Webcam = QtWidgets.QWidget()
-        self.Webcam.setObjectName("Webcam")
-        self.open_cam_button = QtWidgets.QPushButton(self.Webcam)
-        self.open_cam_button.setGeometry(QtCore.QRect(120, 40, 291, 151))
+        self.Video = QtWidgets.QWidget()
+        self.Video.setObjectName("Video")
+        self.open_cam_button = QtWidgets.QPushButton(self.Video)
+        self.open_cam_button.setGeometry(QtCore.QRect(290, 120, 131, 61))
         font = QtGui.QFont()
-        font.setPointSize(18)
+        font.setPointSize(12)
         self.open_cam_button.setFont(font)
         self.open_cam_button.setObjectName("open_cam_button")
-        self.tab.addTab(self.Webcam, "")
+        self.open_cam_button_2 = QtWidgets.QPushButton(self.Video)
+        self.open_cam_button_2.setGeometry(QtCore.QRect(90, 120, 131, 61))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.open_cam_button_2.setFont(font)
+        self.open_cam_button_2.setObjectName("open_cam_button_2")
+        self.layoutWidget_2 = QtWidgets.QWidget(self.Video)
+        self.layoutWidget_2.setGeometry(QtCore.QRect(30, 50, 491, 29))
+        self.layoutWidget_2.setObjectName("layoutWidget_2")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.layoutWidget_2)
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.Address_bar_2 = QtWidgets.QLineEdit(self.layoutWidget_2)
+        self.Address_bar_2.setObjectName("Address_bar_2")
+        self.horizontalLayout_2.addWidget(self.Address_bar_2)
+        self.browser_2 = QtWidgets.QToolButton(self.layoutWidget_2)
+        self.browser_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.browser_2.setObjectName("browser_2")
+        self.horizontalLayout_2.addWidget(self.browser_2)
+        self.tab.addTab(self.Video, "")
         self.text_barcode_scanner = QtWidgets.QFrame(self.main_frame)
         self.text_barcode_scanner.setGeometry(QtCore.QRect(150, 80, 531, 91))
         self.text_barcode_scanner.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -95,26 +114,73 @@ class Ui_Barcode_Scanner(object):
         self.menubar.addAction(self.menuFile.menuAction())
 
         self.retranslateUi(Barcode_Scanner)
-        self.tab.setCurrentIndex(1)
+        self.tab.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Barcode_Scanner)
 
     def retranslateUi(self, Barcode_Scanner):
         _translate = QtCore.QCoreApplication.translate
         Barcode_Scanner.setWindowTitle(_translate("Barcode_Scanner", "Barcode Scanner"))
         self.browser.setText(_translate("Barcode_Scanner", "..."))
+        self.reset_button.setText(_translate("Barcode_Scanner", "Reset"))
+        self.ok_button.setText(_translate("Barcode_Scanner", "Ok"))
         self.tab.setTabText(self.tab.indexOf(self.Image), _translate("Barcode_Scanner", "Image"))
         self.open_cam_button.setText(_translate("Barcode_Scanner", "Open Camera"))
-        self.tab.setTabText(self.tab.indexOf(self.Webcam), _translate("Barcode_Scanner", "Webcam"))
+        self.open_cam_button_2.setText(_translate("Barcode_Scanner", "Video File"))
+        self.browser_2.setText(_translate("Barcode_Scanner", "..."))
+        self.tab.setTabText(self.tab.indexOf(self.Video), _translate("Barcode_Scanner", "Video"))
         self.label_barcode_scanner.setText(_translate("Barcode_Scanner", "Barcode Scanner"))
         self.menuFile.setTitle(_translate("Barcode_Scanner", "File"))
         self.actionAdd_image.setText(_translate("Barcode_Scanner", "Add Image"))
         self.actionOpen_Web_Cam.setText(_translate("Barcode_Scanner", "Open Web Cam"))
         self.actionExit.setText(_translate("Barcode_Scanner", "Exit"))
         self.open_cam_button.clicked.connect(self.webcam)
+        self.browser.clicked.connect(self.getfile_img)
+        self.ok_button.clicked.connect(self.ok)
+        self.reset_button.clicked.connect(self.reset)
+        self.browser_2.clicked.connect(self.getfile_video)
+        self.open_cam_button_2.clicked.connect(self.videofile)
 
     def webcam(self):
         obj = barcode_video.Detector_cam()
         obj.scan()
+
+    def getfile_img(self):
+        formats = str.join(' ', 
+        ['*.%s' %str(fmt).strip("b").strip("'") for fmt in QtGui.QImageReader.supportedImageFormats()])
+        self.fname = QtWidgets.QFileDialog.getOpenFileName(self.main_frame,
+                                                           'Open Image File',
+                                                            "",
+                                                            f'Image ({formats})')
+        self.Address_bar.setText(self.fname[0])
+    
+    def getfile_video(self):
+        self.fname = QtWidgets.QFileDialog.getOpenFileName()
+        self.Address_bar_2.setText(self.fname[0])
+    
+    def ok(self):
+        self.fname = self.Address_bar.text()
+        try:
+            obj = barcode_image.Detector_image()
+            obj.scan(self.fname)
+        except AttributeError:
+            self.Address_bar.setText('Please Select File')
+        except TypeError:
+            self.Address_bar.setText('Please Select File')
+
+    
+    def videofile(self):
+        self.fname = self.Address_bar_2.text()
+        try:
+            obj = barcode_video.Detector_cam()
+            obj.scan_file(self.fname)
+        except AttributeError:
+            self.Address_bar_2.setText('Please Select File')
+        except TypeError:
+            self.Address_bar_2.setText('Please Select File')
+            
+    def reset(self):
+        self.Address_bar.clear()
+        self.Address_bar_2.clear()
 
 if __name__ == "__main__":
     import sys

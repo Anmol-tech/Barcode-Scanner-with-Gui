@@ -4,13 +4,11 @@ import argparse
 
 class Detector_image:
 
-    def scan(self):
-        ap = argparse.ArgumentParser()
-        ap.add_argument('-i','--image',required=True,help="path of image")
-        args = vars(ap.parse_args())
+    def scan(self,address):
+        
 
-        image = cv2.imread(args['image'])
-
+        image = cv2.imread(address)
+        
         bars = pyzbar.decode(image)
 
         for bar in bars:
@@ -22,7 +20,7 @@ class Detector_image:
             bartype = bar.type
 
             text = '{} ({})'.format(bardata,bartype)
-            cv2.putText(image,text,(x,y-10),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
+            cv2.putText(image,text,(x,y+10),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,255),2)
 
             print(f'[INFO] found {bartype} barcode:{bardata}')
 
