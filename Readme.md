@@ -8,4 +8,4 @@
  - **pyzbar** `pip install pyzbar`
 - **imutils**  `pip install imutils`
 - **Opencv (cv2)** `pip install opencv-python`
-- **argparsar** `pip install argparse`
+- **argparsar** `pip install argparse`"# Barcode-Scanner-with-Gui" 
